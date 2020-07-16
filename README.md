@@ -6,4 +6,4 @@ Currently ONLY compatible with iPad. Will set constraints for other devices in c
 
 Next (major) update will add Google Authentication support (as opposed to just UserDefaults). 
 
-Further enhancements will be posted in the coming days. Recommend testing on a 9.7 inch iPad until full compatibility is added.
+Further enhancements will be posted in the coming days. Recommend testing on a 10.2 inch iPad until full compatibility is added.

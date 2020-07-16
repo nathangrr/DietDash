@@ -87,6 +87,25 @@ class ViewController5: UIViewController {
             UserDefaults.standard.set(false, forKey: "finished5")
             UserDefaults.standard.set(false, forKey: "finished6")
         }
+        
+        if Item1.text == ""{
+            Button1.isHidden = true
+        }
+        if Item2.text == ""{
+            Button2.isHidden = true
+        }
+        if Item3.text == ""{
+            Button3.isHidden = true
+        }
+        if Item4.text == ""{
+            Button4.isHidden = true
+        }
+        if Item5.text == ""{
+            Button5.isHidden = true
+        }
+        if Item6.text == ""{
+            Button6.isHidden = true
+        }
     }
     
     @IBAction func ProfileButton(_ sender: Any) {

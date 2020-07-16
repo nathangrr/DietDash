@@ -10,16 +10,39 @@ class ViewController: UIViewController {
     @IBOutlet weak var BoostButton3: UIButton!
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var Progress: UIProgressView!
+    @IBOutlet weak var ProgressDate: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(UserDefaults.standard.integer(forKey: "progressPoints"))
         
         // Set the progress view
-        // For every obj that is filled, increase the maximum by 35 (5 per day, 7 days)
         // After every 7 days, reset the progress to 0
         // Also display what day (of 7) it currently is
-        // If a new item is added within 7 days, make sure it does not affect progress
+        
+        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        var max = 0
+        if UserDefaults.standard.string(forKey: "Obj1") != ""{
+            max += 35
+        }
+        if UserDefaults.standard.string(forKey: "Obj2") != ""{
+            max += 35
+        }
+        if UserDefaults.standard.string(forKey: "Obj3") != ""{
+            max += 35
+        }
+        if UserDefaults.standard.string(forKey: "Obj4") != ""{
+            max += 35
+        }
+        if UserDefaults.standard.string(forKey: "Obj5") != ""{
+            max += 35
+        }
+        if UserDefaults.standard.string(forKey: "Obj6") != ""{
+            max += 35
+        }
+        
+        let prog = Float(Float(progress)/Float(max))
+        Progress.setProgress(prog, animated: true)
         
         // Display the buttons
         BoostButton1.isHidden = false
@@ -34,6 +57,8 @@ class ViewController: UIViewController {
             mostRecentAccess = Date()
         }
         
+        UserDefaults.standard.set(max, forKey: "max")
+        
         let currentDate = Date()
         let df = DateFormatter()
         df.dateFormat = "dd/MM/yyyy"
@@ -42,6 +67,18 @@ class ViewController: UIViewController {
         df2.dateFormat = "MM/dd"
         DateLabel.text = df2.string(from: currentDate)
         
+        var dayNumber = Date().dayNumberOfWeek()!
+        if UserDefaults.standard.integer(forKey: "previousDate") == 7 && dayNumber == 1{
+            Progress.setProgress(0, animated: true)
+            UserDefaults.standard.set(0, forKey: "progressPoints")
+
+        }
+        UserDefaults.standard.set(dayNumber, forKey: "previousDate")
+        var difference = (UserDefaults.standard.integer(forKey: "dayNumber") - dayNumber) + 1
+        print(difference)
+        
+        ProgressDate.text = String(difference)
+                
         if df.string(from: mostRecentAccess) == df.string(from: currentDate){
             let b1 = UserDefaults.standard.bool(forKey: "boost1")
             let b2 = UserDefaults.standard.bool(forKey: "boost2")
@@ -101,38 +138,49 @@ class ViewController: UIViewController {
     }
     
     @IBAction func Boost1(_ sender: Any) {
-        // Increase progress points by 1
         let current = UserDefaults.standard.integer(forKey: "progressPoints")
         UserDefaults.standard.set(current + 1, forKey: "progressPoints")
         UserDefaults.standard.set(true, forKey: "boost1")
-
-        
-        // Hide button
         BoostButton1.isHidden = true
+        
+        var max = UserDefaults.standard.integer(forKey: "max")
+        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let prog = Float(Float(progress)/Float(max))
+        Progress.setProgress(prog, animated: true)
     }
     @IBAction func Boost2(_ sender: Any) {
-        // Increase progress points by 1
         let current = UserDefaults.standard.integer(forKey: "progressPoints")
         UserDefaults.standard.set(current + 1, forKey: "progressPoints")
         UserDefaults.standard.set(true, forKey: "boost2")
-        
-        // Hide button
         BoostButton2.isHidden = true
+        
+        var max = UserDefaults.standard.integer(forKey: "max")
+        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let prog = Float(Float(progress)/Float(max))
+        Progress.setProgress(prog, animated: true)
     }
     
     @IBAction func Boost3(_ sender: Any) {
-        // Increase progress points by 1
         let current = UserDefaults.standard.integer(forKey: "progressPoints")
         UserDefaults.standard.set(current + 1, forKey: "progressPoints")
         UserDefaults.standard.set(true, forKey: "boost3")
-        
-        // Hide button
         BoostButton3.isHidden = true
+        
+        var max = UserDefaults.standard.integer(forKey: "max")
+        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let prog = Float(Float(progress)/Float(max))
+        Progress.setProgress(prog, animated: true)
     }
     @IBAction func EditInfoButton(_ sender: Any) {
         performSegue(withIdentifier: "EditDietSegue1", sender: nil)
     }
     @IBAction func GoalsButton(_ sender: Any) {
         performSegue(withIdentifier: "GoalsQueue1", sender: nil)
+    }
+}
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }

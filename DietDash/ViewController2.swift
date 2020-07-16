@@ -27,6 +27,10 @@ class ViewController2: UIViewController {
         super.viewDidLoad()
         isModalInPresentation = true
         
+        var dayNumber = Date().dayNumberOfWeek2()!
+        UserDefaults.standard.set(500, forKey: "previousDate")
+        UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
+
         let date = Date()
         UserDefaults.standard.set(date, forKey: "dayOfWeek")
         UserDefaults.standard.set(false, forKey: "boost1")
@@ -101,5 +105,11 @@ extension UITextField{
         set {
             self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: newValue!])
         }
+    }
+}
+
+extension Date {
+    func dayNumberOfWeek2() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }

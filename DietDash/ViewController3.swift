@@ -6,6 +6,10 @@ class ViewController3: UIViewController {
     @IBOutlet weak var Weight: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Name.text = UserDefaults.standard.string(forKey: "name")
+        Age.text = UserDefaults.standard.string(forKey: "age")
+        Weight.text = UserDefaults.standard.string(forKey: "weight")
 }
     
     @IBAction func SaveSegue(_ sender: Any) {

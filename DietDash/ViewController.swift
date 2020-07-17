@@ -16,10 +16,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print(UserDefaults.standard.integer(forKey: "progressPoints"))
         
-        // Set the progress view
-        // After every 7 days, reset the progress to 0
-        // Also display what day (of 7) it currently is
-        
         var progress = UserDefaults.standard.integer(forKey: "progressPoints")
         var max = 0
         if UserDefaults.standard.string(forKey: "Obj1") != ""{
@@ -71,6 +67,7 @@ class ViewController: UIViewController {
         if UserDefaults.standard.integer(forKey: "previousDate") == 7 && dayNumber == 1{
             Progress.setProgress(0, animated: true)
             UserDefaults.standard.set(0, forKey: "progressPoints")
+            UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
 
         }
         UserDefaults.standard.set(dayNumber, forKey: "previousDate")

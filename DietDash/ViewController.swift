@@ -16,6 +16,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print(UserDefaults.standard.integer(forKey: "progressPoints"))
         
+        Progress.transform = Progress.transform.scaledBy(x: 1, y: 15)
+
         var progress = UserDefaults.standard.integer(forKey: "progressPoints")
         var max = 0
         if UserDefaults.standard.string(forKey: "Obj1") != ""{
@@ -76,6 +78,9 @@ class ViewController: UIViewController {
         
         ProgressDate.text = String(difference)
                 
+        print("Recent", df.string(from: mostRecentAccess))
+        print("Today", df.string(from: currentDate))
+        
         if df.string(from: mostRecentAccess) == df.string(from: currentDate){
             let b1 = UserDefaults.standard.bool(forKey: "boost1")
             let b2 = UserDefaults.standard.bool(forKey: "boost2")

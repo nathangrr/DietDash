@@ -657,17 +657,15 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3a-Ms-DSK">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3a-Ms-DSK">
                                 <rect key="frame" x="0.0" y="975" width="230" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Profile" image="person.circle" catalog="system">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xh7-Rm-z6M">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xh7-Rm-z6M">
                                 <rect key="frame" x="538" y="974" width="230" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Edit" image="questionmark.circle" catalog="system">
                                     <color key="titleColor" red="0.1375464226" green="0.52884081360000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -677,9 +675,8 @@
                                     <segue destination="vkZ-NG-4D1" kind="presentation" identifier="EditDietSegue1" animates="NO" modalPresentationStyle="fullScreen" id="z49-W9-QMb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aL-Qv-b4Q">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aL-Qv-b4Q">
                                 <rect key="frame" x="238" y="974" width="292" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Goals" image="pencil.circle" catalog="system">
                                     <color key="titleColor" red="0.1375464226" green="0.52884081360000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -689,8 +686,8 @@
                                     <segue destination="cyz-K2-cli" kind="presentation" identifier="GoalsQueue1" animates="NO" modalPresentationStyle="fullScreen" id="Kix-eV-GDu"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="cNK-Yd-qrU">
-                                <rect key="frame" x="32" y="509" width="692" height="2"/>
+                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNK-Yd-qrU">
+                                <rect key="frame" x="32" y="508" width="692" height="3"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="progressTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -712,7 +709,18 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.23026829800000001" green="0.56300093520000005" blue="0.78908273959999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="3aL-Qv-b4Q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="974" id="DzB-Fw-nv1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b3a-Ms-DSK" secondAttribute="bottom" id="XkE-Fv-ueC"/>
+                            <constraint firstItem="xh7-Rm-z6M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="974" id="fCU-ZJ-ULm"/>
+                            <constraint firstItem="xh7-Rm-z6M" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="1" id="iIc-20-z1f"/>
+                            <constraint firstItem="b3a-Ms-DSK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="975" id="ljb-dk-bxi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3aL-Qv-b4Q" secondAttribute="bottom" id="ySN-Yt-qyc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="uQy-pP-9FZ"/>
                     <connections>
@@ -1011,7 +1019,7 @@
         <image name="questionmark.circle" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZO2-8z-O68"/>
+        <segue reference="yIP-RV-6k6"/>
         <segue reference="Kix-eV-GDu"/>
         <segue reference="z49-W9-QMb"/>
     </inferredMetricsTieBreakers>

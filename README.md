@@ -17,4 +17,6 @@ NOTE: Version 1.1 on the App Store will add features 1, 3
 
 NOTE: Version 1.2 on the App Store will greatly expand the usability of the app and add Future Features 5 and 6
 
+NOTE: An ambiguous version (such as 1.1.1, 1.2.1, etc) will add compatibility with iPhone. This is a more minor effort at the moment, as I would like to make the app more feauture complete before expanding to other devices. 
+
 Please provide feedback to nathanranthony@gmail.com about other bug fixes and recommendations. Thanks!

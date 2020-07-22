@@ -10,15 +10,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var BoostButton3: UIButton!
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var Progress: UIProgressView!
-    @IBOutlet weak var ProgressDate: UILabel!
+    @IBOutlet weak var Percentage: UILabel!
+    @IBOutlet weak var Day: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaults.standard.integer(forKey: "progressPoints"))
         
+        // Get previous Progress Points
         Progress.transform = Progress.transform.scaledBy(x: 1, y: 15)
-
         var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        
+        // Set the maximum of the Progress Bar
         var max = 0
         if UserDefaults.standard.string(forKey: "Obj1") != ""{
             max += 35
@@ -39,14 +41,17 @@ class ViewController: UIViewController {
             max += 35
         }
         
+        // Set the progress bar
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
+        Percentage.text = String(format: "%.01f", prog * 100) + "%"
         
-        // Display the buttons
+        // Display the 3 boost buttons initially
         BoostButton1.isHidden = false
         BoostButton2.isHidden = false
         BoostButton3.isHidden = false
         
+        // Determine the most recent time the app was accessed
         var mostRecentAccess = Date()
         if let temp = UserDefaults.standard.object(forKey: "dayOfWeek") as! Date?{
             mostRecentAccess = temp
@@ -55,6 +60,8 @@ class ViewController: UIViewController {
             mostRecentAccess = Date()
         }
         
+        // Set the max and the dayOfWeek for future reference
+        UserDefaults.standard.set(mostRecentAccess, forKey: "dayOfWeek")
         UserDefaults.standard.set(max, forKey: "max")
         
         let currentDate = Date()
@@ -65,21 +72,19 @@ class ViewController: UIViewController {
         df2.dateFormat = "MM/dd"
         DateLabel.text = df2.string(from: currentDate)
         
+        let df3 = DateFormatter()
+        df3.dateFormat = "EEEE"
+        Day.text = df3.string(from: currentDate)
+        
+        // If the week has ended, reset the progress bar
         var dayNumber = Date().dayNumberOfWeek()!
         if UserDefaults.standard.integer(forKey: "previousDate") == 7 && dayNumber == 1{
             Progress.setProgress(0, animated: true)
             UserDefaults.standard.set(0, forKey: "progressPoints")
-            UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
-
+            Percentage.text = "0%"
         }
         UserDefaults.standard.set(dayNumber, forKey: "previousDate")
-        var difference = (UserDefaults.standard.integer(forKey: "dayNumber") - dayNumber) + 1
-        print(difference)
-        
-        ProgressDate.text = String(difference)
-                
-        print("Recent", df.string(from: mostRecentAccess))
-        print("Today", df.string(from: currentDate))
+        UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
         
         if df.string(from: mostRecentAccess) == df.string(from: currentDate){
             let b1 = UserDefaults.standard.bool(forKey: "boost1")
@@ -149,6 +154,7 @@ class ViewController: UIViewController {
         var progress = UserDefaults.standard.integer(forKey: "progressPoints")
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
+        Percentage.text = String(format: "%.01f", prog * 100) + "%"
     }
     @IBAction func Boost2(_ sender: Any) {
         let current = UserDefaults.standard.integer(forKey: "progressPoints")
@@ -160,6 +166,7 @@ class ViewController: UIViewController {
         var progress = UserDefaults.standard.integer(forKey: "progressPoints")
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
+        Percentage.text = String(format: "%.01f", prog * 100) + "%"
     }
     
     @IBAction func Boost3(_ sender: Any) {
@@ -172,6 +179,7 @@ class ViewController: UIViewController {
         var progress = UserDefaults.standard.integer(forKey: "progressPoints")
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
+        Percentage.text = String(format: "%.01f", prog * 100) + "%"
     }
     @IBAction func EditInfoButton(_ sender: Any) {
         performSegue(withIdentifier: "EditDietSegue1", sender: nil)

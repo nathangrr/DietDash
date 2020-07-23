@@ -5,8 +5,8 @@ Overview: Fully functional iOS application to track diet trends, set diet goals,
 Notice: Compatible ONLY with a 9.7 inch iPad during alpha phase.
 
 Further Features Before 1.0 Release: 
-1) Optimize for ALL iPad sizes
-2) Get weekly map working correctly
-3) App Icon
+1) Optimize for ALL iPad sizes (complicated)
+2) Get weekly map working correctly (very easy)
+3) App Icon (technically easy)
 
 Please provide feedback to nathanranthony@gmail.com about other bug fixes and recommendations. Thanks!

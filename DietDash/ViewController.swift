@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         
         if previousWeekOfYear != currentWeekOfYear{
             if Completed(points: prog) == true{
-                // then add a point to the weekly map
+                
                 let previous = UserDefaults.standard.integer(forKey: "weeklyMap")
                 UserDefaults.standard.set(previous + 1, forKey: "weeklyMap")
             }

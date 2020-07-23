@@ -32,6 +32,9 @@ class ViewController6: UIViewController {
     @IBOutlet weak var L28: UILabel!
     @IBOutlet weak var L29: UILabel!
     @IBOutlet weak var L30: UILabel!
+    @IBOutlet weak var Feedback: UILabel!
+    @IBOutlet weak var Feedback2: UILabel!
+    @IBOutlet weak var Reset: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,10 +104,141 @@ class ViewController6: UIViewController {
         L30?.layer.cornerRadius = 40.0
         L30?.layer.masksToBounds = true
         
-        L1.backgroundColor = UIColor.green
+        if number > 0 {
+            L1.backgroundColor = UIColor.green
+        }
         
+        if number > 1 {
+            L2.backgroundColor = UIColor.green
+        }
         
-        print(number)
+        if number > 2 {
+            L3.backgroundColor = UIColor.green
+        }
+        
+        if number > 3 {
+            L4.backgroundColor = UIColor.green
+        }
+        
+        if number > 4 {
+            L5.backgroundColor = UIColor.green
+        }
+        
+        if number > 5 {
+            L6.backgroundColor = UIColor.green
+        }
+        
+        if number > 6 {
+            L7.backgroundColor = UIColor.green
+        }
+        
+        if number > 7 {
+            L8.backgroundColor = UIColor.green
+        }
+        
+        if number > 8 {
+            L9.backgroundColor = UIColor.green
+        }
+        
+        if number > 9 {
+            L10.backgroundColor = UIColor.green
+        }
+        
+        if number > 10 {
+            L11.backgroundColor = UIColor.green
+        }
+        
+        if number > 11 {
+            L12.backgroundColor = UIColor.green
+        }
+        
+        if number > 12 {
+            L13.backgroundColor = UIColor.green
+        }
+        
+        if number > 13 {
+            L14.backgroundColor = UIColor.green
+        }
+        
+        if number > 14 {
+            L15.backgroundColor = UIColor.green
+        }
+        
+        if number > 15 {
+            L16.backgroundColor = UIColor.green
+        }
+        
+        if number > 16 {
+            L17.backgroundColor = UIColor.green
+        }
+        
+        if number > 17 {
+            L18.backgroundColor = UIColor.green
+        }
+        
+        if number > 18 {
+            L19.backgroundColor = UIColor.green
+        }
+        
+        if number > 19 {
+            L20.backgroundColor = UIColor.green
+        }
+        
+        if number > 20 {
+            L21.backgroundColor = UIColor.green
+        }
+        
+        if number > 21 {
+            L22.backgroundColor = UIColor.green
+        }
+        
+        if number > 22 {
+            L23.backgroundColor = UIColor.green
+        }
+        
+        if number > 23 {
+            L24.backgroundColor = UIColor.green
+        }
+        
+        if number > 24 {
+            L25.backgroundColor = UIColor.green
+        }
+        
+        if number > 25 {
+            L26.backgroundColor = UIColor.green
+        }
+        
+        if number > 26 {
+            L27.backgroundColor = UIColor.green
+        }
+        
+        if number > 27 {
+            L28.backgroundColor = UIColor.green
+        }
+        
+        if number > 28 {
+            L29.backgroundColor = UIColor.green
+        }
+        
+        if number > 29 {
+            L30.backgroundColor = UIColor.green
+        }
+        
+        if number >= 30{
+            Feedback.text = "Roadmap Complete!!"
+            Feedback2.text = "Congratulations on your hard work!"
+            Reset.isHidden = false
+        }
+        
     }
-
+    
+    @IBAction func ResetButton(_ sender: Any) {
+        UserDefaults.standard.set(0, forKey: "weeklyMap")
+        UserDefaults.standard.set(0, forKey: "progressPoints")
+        Reset.isHidden = true
+        Feedback.text = "Progress awarded at the end of each week"
+        Feedback2.text = "Reach a 30 week streak and conquer your diet!"
+        performSegue(withIdentifier: "ResetRoadmapSegue", sender: nil)
+    }
+    
 }

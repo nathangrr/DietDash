@@ -12,13 +12,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var Progress: UIProgressView!
     @IBOutlet weak var Percentage: UILabel!
     @IBOutlet weak var Day: UILabel!
+    @IBOutlet weak var GreetingsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
+
         
         // Get previous Progress Points
         Progress.transform = Progress.transform.scaledBy(x: 1, y: 15)
-        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let progress = UserDefaults.standard.integer(forKey: "progressPoints")
         
         // Set the maximum of the Progress Bar
         var max = 0
@@ -61,12 +64,28 @@ class ViewController: UIViewController {
         }
         
         // Set the max and the dayOfWeek for future reference
+        UserDefaults.standard.set(mostRecentAccess, forKey: "dayOfWeek2")
         UserDefaults.standard.set(mostRecentAccess, forKey: "dayOfWeek")
         UserDefaults.standard.set(max, forKey: "max")
         
+        //##############
+        // Date Formats
         let currentDate = Date()
         let df = DateFormatter()
         df.dateFormat = "dd/MM/yyyy"
+        
+        let greetingsDate = DateFormatter()
+        greetingsDate.dateFormat = "HH"
+        let militaryHour = Int(greetingsDate.string(from: currentDate))!
+        if militaryHour >= 0 && militaryHour < 12{
+            GreetingsLabel.text = "Good Morning!"
+        }
+        if militaryHour >= 12 && militaryHour <= 17{
+            GreetingsLabel.text = "Good Afternoon!"
+        }
+        if militaryHour > 17{
+            GreetingsLabel.text = "Good Evening!"
+        }
         
         let df2 = DateFormatter()
         df2.dateFormat = "MM/dd"
@@ -75,16 +94,33 @@ class ViewController: UIViewController {
         let df3 = DateFormatter()
         df3.dateFormat = "EEEE"
         Day.text = df3.string(from: currentDate)
+        //##############
         
         // If the week has ended, reset the progress bar
-        var dayNumber = Date().dayNumberOfWeek()!
-        if UserDefaults.standard.integer(forKey: "previousDate") == 7 && dayNumber == 1{
+        let dayNumber = Date().dayNumberOfWeek()!
+        
+        // And if both days are 1, then dheck if the dates differ from previous to current
+        if UserDefaults.standard.integer(forKey: "previousDate") == 1 && dayNumber == 1{
+            if df.string(from: mostRecentAccess) != df.string(from: currentDate){
+                Progress.setProgress(0, animated: true)
+                UserDefaults.standard.set(0, forKey: "progressPoints")
+                Percentage.text = "0%"
+            }
+        }
+        
+        if (2...7).contains(UserDefaults.standard.integer(forKey: "previousDate")) && dayNumber == 1{
             Progress.setProgress(0, animated: true)
             UserDefaults.standard.set(0, forKey: "progressPoints")
             Percentage.text = "0%"
         }
+        
+        // Also deal with the third case, if a new week has started, but its not Sunday, still reset
+        // Maybe get the week number and year from Date()
+        
+        
         UserDefaults.standard.set(dayNumber, forKey: "previousDate")
         UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
+        
         
         if df.string(from: mostRecentAccess) == df.string(from: currentDate){
             let b1 = UserDefaults.standard.bool(forKey: "boost1")
@@ -110,22 +146,32 @@ class ViewController: UIViewController {
         UserDefaults.standard.set(currentDate, forKey: "dayOfWeek")
         
         // Set text for boost buttons
-        var boostChoices:[String] = ["1 Vegetable", "1 Fruit", "10 Min Walk", "10 Min Stand", "Skip Snack", "Free Boost!", "15 Min Run", "10 Min Abs", "2 Fruit", "2 vegetables"]
+        var boostChoices:[String] = ["1 Vegetable", "1 Fruit", "10 Min Walk", "5 Min Stand", "Skip Snack", "Free Boost!", "15 Min Run", "10 Min Abs", "2 Fruit", "2 vegetables"]
         
-        self.BoostButton1.setTitle(boostChoices.randomElement(), for: .normal)
-        self.BoostButton2.setTitle(boostChoices.randomElement(), for: .normal)
-        self.BoostButton3.setTitle(boostChoices.randomElement(), for: .normal)
+        boostChoices = boostChoices.shuffled()
+        
+        self.BoostButton1.setTitle(boostChoices[0], for: .normal)
+        self.BoostButton2.setTitle(boostChoices[1], for: .normal)
+        self.BoostButton3.setTitle(boostChoices[2], for: .normal)
         
         self.Name.text = UserDefaults.standard.string(forKey: "name")
         self.Age.text = UserDefaults.standard.string(forKey: "age")
         self.Weight.text = UserDefaults.standard.string(forKey: "weight")
         
         self.Name.textColor = UIColor.white
-        self.Age.textColor = UIColor.white
-        self.Weight.textColor = UIColor.white
         
+        // If progress is 100%, display message
+        if Completed(points: prog) == true {
+            Percentage.text = "Dash Complete!"
+            Percentage.textColor = UIColor.green
         }
+        
+    }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         if !UserDefaults.standard.bool(forKey: "login") {
             performSegue(withIdentifier: "segue1", sender: nil)
@@ -136,10 +182,9 @@ class ViewController: UIViewController {
         self.Weight.text = UserDefaults.standard.string(forKey: "weight")
         
         self.Name.textColor = UIColor.white
-        self.Age.textColor = UIColor.white
-        self.Weight.textColor = UIColor.white
         
     }
+    
     @IBAction func EditButton(_ sender: Any) {
         performSegue(withIdentifier: "EditSegue", sender: nil)
     }
@@ -150,11 +195,17 @@ class ViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "boost1")
         BoostButton1.isHidden = true
         
-        var max = UserDefaults.standard.integer(forKey: "max")
-        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let max = UserDefaults.standard.integer(forKey: "max")
+        let progress = UserDefaults.standard.integer(forKey: "progressPoints")
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
         Percentage.text = String(format: "%.01f", prog * 100) + "%"
+        
+        // If progress is 100%, display message
+        if Completed(points: prog) == true {
+            Percentage.text = "Dash Complete!"
+            Percentage.textColor = UIColor.green
+        }
     }
     @IBAction func Boost2(_ sender: Any) {
         let current = UserDefaults.standard.integer(forKey: "progressPoints")
@@ -162,11 +213,17 @@ class ViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "boost2")
         BoostButton2.isHidden = true
         
-        var max = UserDefaults.standard.integer(forKey: "max")
-        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let max = UserDefaults.standard.integer(forKey: "max")
+        let progress = UserDefaults.standard.integer(forKey: "progressPoints")
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
         Percentage.text = String(format: "%.01f", prog * 100) + "%"
+        
+        // If progress is 100%, display message
+        if Completed(points: prog) == true {
+            Percentage.text = "Dash Complete!"
+            Percentage.textColor = UIColor.green
+        }
     }
     
     @IBAction func Boost3(_ sender: Any) {
@@ -175,17 +232,27 @@ class ViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "boost3")
         BoostButton3.isHidden = true
         
-        var max = UserDefaults.standard.integer(forKey: "max")
-        var progress = UserDefaults.standard.integer(forKey: "progressPoints")
+        let max = UserDefaults.standard.integer(forKey: "max")
+        let progress = UserDefaults.standard.integer(forKey: "progressPoints")
         let prog = Float(Float(progress)/Float(max))
         Progress.setProgress(prog, animated: true)
         Percentage.text = String(format: "%.01f", prog * 100) + "%"
+        
+        // If progress is 100%, display message
+        if Completed(points: prog) == true {
+            Percentage.text = "Dash Complete!"
+            Percentage.textColor = UIColor.green
+        }
     }
+    
     @IBAction func EditInfoButton(_ sender: Any) {
         performSegue(withIdentifier: "EditDietSegue1", sender: nil)
     }
     @IBAction func GoalsButton(_ sender: Any) {
         performSegue(withIdentifier: "GoalsQueue1", sender: nil)
+    }
+    @IBAction func MoreButton(_ sender: Any) {
+        performSegue(withIdentifier: "MoreSegue", sender: nil)
     }
 }
 
@@ -193,4 +260,11 @@ extension Date {
     func dayNumberOfWeek() -> Int? {
         return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
+}
+
+func Completed(points: Float) -> Bool? {
+    if (points * 100) >= 100{
+        return true
+    }
+    return false
 }

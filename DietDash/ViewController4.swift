@@ -17,7 +17,8 @@ class ViewController4: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNeedsStatusBarAppearanceUpdate()
+
         O1.text = UserDefaults.standard.string(forKey: "Obj1")
         G1.text = UserDefaults.standard.string(forKey: "Goal1")
         O2.text = UserDefaults.standard.string(forKey: "Obj2")
@@ -58,6 +59,10 @@ class ViewController4: UIViewController {
     }
     @IBAction func GoalsButton(_ sender: Any) {
         performSegue(withIdentifier: "GoalsSegue3", sender: nil)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
     
 }

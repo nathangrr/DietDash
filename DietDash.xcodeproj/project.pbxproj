@@ -19,6 +19,7 @@
 		7C99A6E823B15F7E00684F02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C99A6E623B15F7E00684F02 /* LaunchScreen.storyboard */; };
 		7C99A6FE23B15F7E00684F02 /* DietDashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99A6FD23B15F7E00684F02 /* DietDashUITests.swift */; };
 		7C99A70C23B15FBF00684F02 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99A70B23B15FBF00684F02 /* ViewController2.swift */; };
+		7CD8906C24C937BA005F2940 /* ViewController6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8906B24C937BA005F2940 /* ViewController6.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		7C99A6FD23B15F7E00684F02 /* DietDashUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietDashUITests.swift; sourceTree = "<group>"; };
 		7C99A6FF23B15F7E00684F02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C99A70B23B15FBF00684F02 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
+		7CD8906B24C937BA005F2940 /* ViewController6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController6.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				7C0D324F24BF84A500E97905 /* ViewController3.swift */,
 				7C0D325124BFF1A800E97905 /* ViewController4.swift */,
 				7C0D325324BFF1C300E97905 /* ViewController5.swift */,
+				7CD8906B24C937BA005F2940 /* ViewController6.swift */,
 			);
 			path = DietDash;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				7C0D325024BF84A500E97905 /* ViewController3.swift in Sources */,
 				7C0D325424BFF1C300E97905 /* ViewController5.swift in Sources */,
 				7C99A6D923B15F7D00684F02 /* AppDelegate.swift in Sources */,
+				7CD8906C24C937BA005F2940 /* ViewController6.swift in Sources */,
 				7C99A6DB23B15F7D00684F02 /* SceneDelegate.swift in Sources */,
 				7C99A6E323B15F7D00684F02 /* DietDash.xcdatamodeld in Sources */,
 			);

@@ -16,7 +16,8 @@ class ViewController5: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNeedsStatusBarAppearanceUpdate()
+
         Item1.text = UserDefaults.standard.string(forKey: "Obj1")
         Item2.text = UserDefaults.standard.string(forKey: "Obj2")
         Item3.text = UserDefaults.standard.string(forKey: "Obj3")
@@ -26,7 +27,7 @@ class ViewController5: UIViewController {
         
         // Check if a day has passed. If so, set all buttons to original state
         var mostRecentAccess = Date()
-        if let temp = UserDefaults.standard.object(forKey: "dayOfWeek") as! Date?{
+        if let temp = UserDefaults.standard.object(forKey: "dayOfWeek2") as! Date?{
             mostRecentAccess = temp
         }
         else{
@@ -52,6 +53,7 @@ class ViewController5: UIViewController {
         Button6.isEnabled = true
         
         if df.string(from: mostRecentAccess) == df.string(from: currentDate){
+            print("YES")
             
             if UserDefaults.standard.bool(forKey: "finished1"){
                 Button1.backgroundColor = UIColor.green
@@ -80,6 +82,7 @@ class ViewController5: UIViewController {
             
         }
         else{
+            print("NO")
             UserDefaults.standard.set(false, forKey: "finished1")
             UserDefaults.standard.set(false, forKey: "finished2")
             UserDefaults.standard.set(false, forKey: "finished3")
@@ -106,6 +109,8 @@ class ViewController5: UIViewController {
         if Item6.text == ""{
             Button6.isHidden = true
         }
+        
+        UserDefaults.standard.set(currentDate, forKey: "dayOfWeek2")
     }
     
     @IBAction func ProfileButton(_ sender: Any) {
@@ -156,4 +161,9 @@ class ViewController5: UIViewController {
         Button1.isEnabled = false
         UserDefaults.standard.set(true, forKey: "finished6")
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
 }

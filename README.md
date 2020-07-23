@@ -11,13 +11,13 @@ Future Features:
 4) Track previous weekly progress, view more important feedback
 5) Database connectivity to store user data (as opposed to UserDefaults at the moment)
 
-Version 1.0 on the App Store will only add Future Feature number 2
-Version 1.1 on the App Store will add features 1, 3
-Version 1.2 on the App Store will greatly expand the usability of the app and add Future Features 5 and 6
+1.0) on the App Store will only add Future Feature number 2
+1.1) on the App Store will add features 1, 3
+1.2) on the App Store will greatly expand the usability of the app and add Future Features 5 and 6
 
 Please provide feedback to nathanranthony@gmail.com about other bug fixes and recommendations. Thanks!
 
 Known Fixes Before First Release:
-Reseting data should rely on the previous week/year vs current week/year, as opposed to the current method
-3 Remaining views need implementation
-All iPad versions need support
+1) Reseting data should rely on the previous week/year vs current week/year, as opposed to the current method
+2) 3 Remaining views need implementation
+3) All iPad versions need support

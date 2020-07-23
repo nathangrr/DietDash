@@ -18,7 +18,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setNeedsStatusBarAppearanceUpdate()
 
-        
         // Get previous Progress Points
         Progress.transform = Progress.transform.scaledBy(x: 1, y: 15)
         let progress = UserDefaults.standard.integer(forKey: "progressPoints")
@@ -96,31 +95,30 @@ class ViewController: UIViewController {
         Day.text = df3.string(from: currentDate)
         //##############
         
-        // If the week has ended, reset the progress bar
-        let dayNumber = Date().dayNumberOfWeek()!
+        let previousWeekOfYear = UserDefaults.standard.integer(forKey: "weekOfYear")
+        let calendar = Calendar.current
+        let currentWeekOfYear = calendar.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
         
-        // And if both days are 1, then dheck if the dates differ from previous to current
-        if UserDefaults.standard.integer(forKey: "previousDate") == 1 && dayNumber == 1{
-            if df.string(from: mostRecentAccess) != df.string(from: currentDate){
-                Progress.setProgress(0, animated: true)
-                UserDefaults.standard.set(0, forKey: "progressPoints")
-                Percentage.text = "0%"
+        if previousWeekOfYear != currentWeekOfYear{
+            if Completed(points: prog) == true{
+                // then add a point to the weekly map
+                let previous = UserDefaults.standard.integer(forKey: "weeklyMap")
+                UserDefaults.standard.set(previous + 1, forKey: "weeklyMap")
             }
-        }
-        
-        if (2...7).contains(UserDefaults.standard.integer(forKey: "previousDate")) && dayNumber == 1{
+            
             Progress.setProgress(0, animated: true)
             UserDefaults.standard.set(0, forKey: "progressPoints")
             Percentage.text = "0%"
+            
         }
         
-        // Also deal with the third case, if a new week has started, but its not Sunday, still reset
-        // Maybe get the week number and year from Date()
+        UserDefaults.standard.set(currentWeekOfYear, forKey: "weekOfYear")
         
+        // If the week has ended, reset the progress bar
+        let dayNumber = Date().dayNumberOfWeek()!
         
         UserDefaults.standard.set(dayNumber, forKey: "previousDate")
         UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
-        
         
         if df.string(from: mostRecentAccess) == df.string(from: currentDate){
             let b1 = UserDefaults.standard.bool(forKey: "boost1")

@@ -27,7 +27,13 @@ class ViewController2: UIViewController {
         super.viewDidLoad()
         isModalInPresentation = true
         
-        var dayNumber = Date().dayNumberOfWeek2()!
+        UserDefaults.standard.set(0, forKey: "weeklyMap")
+        
+        let calendar = Calendar.current
+        let weekOfYear = calendar.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
+        UserDefaults.standard.set(weekOfYear, forKey: "weekOfYear")
+        
+        let dayNumber = Date().dayNumberOfWeek2()!
         UserDefaults.standard.set(500, forKey: "previousDate")
         UserDefaults.standard.set(dayNumber, forKey: "dayNumber")
 
@@ -38,6 +44,7 @@ class ViewController2: UIViewController {
         UserDefaults.standard.set(false, forKey: "boost3")
         
         // Keep track of the diet progress
+        // Give extra progress points when starting, depending on the day of the week
         UserDefaults.standard.set(0, forKey: "progressPoints")
         
         NameField.layer.shadowColor = UIColor.gray.cgColor
@@ -61,19 +68,51 @@ class ViewController2: UIViewController {
         UserDefaults.standard.set(false, forKey: "finished4")
         UserDefaults.standard.set(false, forKey: "finished5")
         UserDefaults.standard.set(false, forKey: "finished6")
-
-        
     }
 
     @IBAction func LoginButton(_ sender: UIButton) {
         let textfieldInt: Int? = Int(WeightField.text!)
         if NameField.text!.count > 0 && AgeField.text!.count > 0 && WeightField.text!.count > 0 {
-        UserDefaults.standard.set(NameField.text, forKey: "name")
-        UserDefaults.standard.set(AgeField.text, forKey: "age")
-        UserDefaults.standard.set(WeightField.text, forKey: "weight")
-        UserDefaults.standard.set(true, forKey: "login")
-        performSegue(withIdentifier: "loginSegue", sender: nil)
-        SetUserData()
+            UserDefaults.standard.set(NameField.text, forKey: "name")
+            UserDefaults.standard.set(AgeField.text, forKey: "age")
+            UserDefaults.standard.set(WeightField.text, forKey: "weight")
+            UserDefaults.standard.set(true, forKey: "login")
+            performSegue(withIdentifier: "loginSegue", sender: nil)
+            SetUserData()
+                
+            // Give bonus progress points
+            if UserDefaults.standard.string(forKey: "Obj1") != ""{
+                let progress = UserDefaults.standard.integer(forKey: "progressPoints")
+                let dayNumber = UserDefaults.standard.string(forKey: "dayNumber")
+                UserDefaults.standard.set(progress + (5 * Int(dayNumber!)!), forKey: "progressPoints")
+            }
+            if UserDefaults.standard.string(forKey: "Obj2") != ""{
+                let progress = UserDefaults.standard.integer(forKey: "progressPoints")
+                let dayNumber = UserDefaults.standard.string(forKey: "dayNumber")
+                UserDefaults.standard.set(progress + (5 * Int(dayNumber!)!), forKey: "progressPoints")
+            }
+            if UserDefaults.standard.string(forKey: "Obj3") != ""{
+                let progress = UserDefaults.standard.integer(forKey: "progressPoints")
+                let dayNumber = UserDefaults.standard.string(forKey: "dayNumber")
+                UserDefaults.standard.set(progress + (5 * Int(dayNumber!)!), forKey: "progressPoints")
+            }
+            if UserDefaults.standard.string(forKey: "Obj4") != ""{
+                let progress = UserDefaults.standard.integer(forKey: "progressPoints")
+                let dayNumber = UserDefaults.standard.string(forKey: "dayNumber")
+                UserDefaults.standard.set(progress + (5 * Int(dayNumber!)!), forKey: "progressPoints")
+            }
+            if UserDefaults.standard.string(forKey: "Obj5") != ""{
+                let progress = UserDefaults.standard.integer(forKey: "progressPoints")
+                let dayNumber = UserDefaults.standard.string(forKey: "dayNumber")
+                UserDefaults.standard.set(progress + (5 * Int(dayNumber!)!), forKey: "progressPoints")
+            }
+            if UserDefaults.standard.string(forKey: "Obj6") != ""{
+                let progress = UserDefaults.standard.integer(forKey: "progressPoints")
+                let dayNumber = UserDefaults.standard.string(forKey: "dayNumber")
+                UserDefaults.standard.set(progress + (5 * Int(dayNumber!)!), forKey: "progressPoints")
+            }
+            
+            
         }
     }
     

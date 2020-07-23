@@ -18,5 +18,4 @@ class ViewController3: UIViewController {
         UserDefaults.standard.set(Weight.text, forKey: "weight")
         performSegue(withIdentifier: "SaveSegue", sender: nil)
     }
-    
 }

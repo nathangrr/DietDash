@@ -65,6 +65,11 @@ class ViewController4: UIViewController {
         .lightContent
     }
     
+    @IBAction func FaqButton(_ sender: Any) {
+        performSegue(withIdentifier: "FaqSegue", sender: nil)
+    }
+    
+    @IBAction func AboutButton(_ sender: Any) {
+        performSegue(withIdentifier: "AboutSegue", sender: nil)
+    }
 }
-
-

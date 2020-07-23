@@ -4,13 +4,8 @@ Overview: Fully functional iOS application to track diet trends, set diet goals,
 
 Notice: Compatible ONLY with a 9.7 inch iPad during alpha phase.
 
-Future Features: 
-1) Will have the ability to add more than 6 daily goals. Will also add "scrolling" to the login page
+Further Features Before 1.0 Release: 
+1) Optimize for ALL iPad sizes
+2) Get weekly map working correctly
 
 Please provide feedback to nathanranthony@gmail.com about other bug fixes and recommendations. Thanks!
-
-Known Fixes Before First Release:
-1) 3 Remaining views need implementation
-2) All iPad versions need support
-3) Track previous weekly progress, view more important feedback (in + menu)
-4) If adding or removing a goal in the middle of the week, adjust progress accordingly

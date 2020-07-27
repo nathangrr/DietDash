@@ -13,7 +13,7 @@ Please provide feedback to nathanranthony@gmail.com about other bug fixes and re
 
 *************
 
-Featues:
+Features:
 1) The user creates an account locally on their device. Up to 6 objectives can be created along with their respective goals
 2) The 'goal' of the app is to accumulate enough progress points each week to fill the progress bar. Points can be obtained from completing daily objectives.
 3) Boosts can also be utilized to gain more progress points. Up to 3 boosts can be used a day. They are randomized.
